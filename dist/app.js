@@ -13,8 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const auth_route_1 = require("./app/module/auth/auth.route");
 const app = (0, express_1.default)();
 app.use((0, express_1.default)());
+app.use('/api/auth', auth_route_1.AuthRouter);
 app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send({ message: "server is running" });
 }));
