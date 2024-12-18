@@ -1,10 +1,14 @@
-import express from 'express'
-import { AuthController } from './auth.controller'
+import express from 'express';
+import { AuthController } from './auth.controller';
+import validateRequest from '../../../middelware/validateRequest';
+import { UserValidation } from '../user/user.validation';
 
-const router = express.Router()
+const router = express.Router();
 
-router.post('/register', AuthController.register)
+router.post(
+  '/register',
+  validateRequest(UserValidation.userValidationSchema),
+  AuthController.register,
+);
 
-
-
-export const AuthRouter = router
+export const AuthRouter = router;

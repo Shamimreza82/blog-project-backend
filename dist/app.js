@@ -15,18 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const express_1 = __importDefault(require("express"));
 const auth_route_1 = require("./app/module/auth/auth.route");
+const globalErrorHandler_1 = __importDefault(require("./middelware/globalErrorHandler"));
+const routerErrorHandler_1 = __importDefault(require("./middelware/routerErrorHandler"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use('/api/auth', auth_route_1.AuthRouter);
 app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send({ message: "server is running" });
 }));
-app.use((err, req, res, next) => {
-    console.log(err);
-    res.status(500).json({
-        success: false,
-        message: err.message || "something wants wrong",
-        error: err
-    });
-});
+app.use(routerErrorHandler_1.default);
+app.use(globalErrorHandler_1.default);
 exports.default = app;

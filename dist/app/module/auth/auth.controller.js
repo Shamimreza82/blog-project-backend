@@ -15,18 +15,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const catchAsync_1 = __importDefault(require("../../../utils/catchAsync"));
-const user_validation_1 = require("../user/user.validation");
+const auth_service_1 = require("./auth.service");
 const register = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const validationUser = user_validation_1.UserValidation.userValidationSchema.parse(req.body);
-    console.log(validationUser);
-    console.log(req.body);
+    const result = yield auth_service_1.AuthServices.register(req.body);
     res.json({
         success: true,
-        message: "User Register Successfully",
+        message: 'User Register Successfully',
         statusCode: http_status_codes_1.StatusCodes.CREATED,
-        data: req.body || {}
+        data: result || {},
     });
 }));
 exports.AuthController = {
-    register
+    register,
 };
