@@ -14,7 +14,7 @@ const userValidationSchema = zod_1.z.object({
     }).min(6, "Password must be at least 6 characters long"),
     role: zod_1.z.enum(["admin", "user"], {
         required_error: "Role is required",
-    }),
+    }).default('user'),
     isBlocked: zod_1.z.boolean().default(false),
 });
 exports.UserValidation = {

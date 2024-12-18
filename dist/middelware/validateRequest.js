@@ -12,21 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-/* eslint-disable @typescript-eslint/no-explicit-any */
-const express_1 = __importDefault(require("express"));
-const auth_route_1 = require("./app/module/auth/auth.route");
-const app = (0, express_1.default)();
-app.use(express_1.default.json());
-app.use('/api/auth', auth_route_1.AuthRouter);
-app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.send({ message: "server is running" });
-}));
-app.use((err, req, res, next) => {
-    console.log(err);
-    res.status(500).json({
-        success: false,
-        message: err.message || "something wants wrong",
-        error: err
-    });
-});
-exports.default = app;
+const catchAsync_1 = __importDefault(require("../utils/catchAsync"));
+const validateRequest = (schema) => {
+    return (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+        yield schema.parseAsync({ body: req.body });
+        next();
+    }));
+};
+exports.default = validateRequest;

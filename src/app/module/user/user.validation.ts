@@ -15,7 +15,7 @@ const userValidationSchema = z.object({
   
   role: z.enum(["admin", "user"], {
     required_error: "Role is required",
-  }),
+  }).default('user'),
   
   isBlocked: z.boolean().default(false),
 });
