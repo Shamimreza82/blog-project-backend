@@ -27,6 +27,13 @@ const userValidationSchema = zod_1.z.object({
         isBlocked: zod_1.z.boolean().default(false),
     }),
 });
+const loginValidationSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        email: zod_1.z.string({ required_error: "Email is required" }).email("Invalid email address"),
+        password: zod_1.z.string().min(6, "Password must be at least 6 characters long"),
+    })
+});
 exports.UserValidation = {
     userValidationSchema,
+    loginValidationSchema
 };

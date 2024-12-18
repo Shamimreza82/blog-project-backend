@@ -18,13 +18,23 @@ const catchAsync_1 = __importDefault(require("../../../utils/catchAsync"));
 const auth_service_1 = require("./auth.service");
 const register = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield auth_service_1.AuthServices.register(req.body);
-    res.json({
+    res.status(http_status_codes_1.StatusCodes.CREATED).json({
         success: true,
         message: 'User Register Successfully',
         statusCode: http_status_codes_1.StatusCodes.CREATED,
         data: result || {},
     });
 }));
+const login = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield auth_service_1.AuthServices.login(req.body);
+    res.status(http_status_codes_1.StatusCodes.OK).json({
+        success: true,
+        message: 'User Login Successfully',
+        statusCode: http_status_codes_1.StatusCodes.OK,
+        data: result || {},
+    });
+}));
 exports.AuthController = {
     register,
+    login
 };

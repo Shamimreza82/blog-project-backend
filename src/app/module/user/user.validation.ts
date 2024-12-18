@@ -30,6 +30,15 @@ const userValidationSchema = z.object({
   }),
 });
 
+
+const loginValidationSchema = z.object({
+  body: z.object({
+    email: z.string({required_error: "Email is required"}).email("Invalid email address"), 
+    password: z.string().min(6, "Password must be at least 6 characters long"),
+  })
+})
+
 export const UserValidation = {
   userValidationSchema,
+  loginValidationSchema
 };
