@@ -15,5 +15,5 @@ router.post('/register', (0, validateRequest_1.default)(user_validation_1.UserVa
 router.post('/login', (0, validateRequest_1.default)(user_validation_1.UserValidation.loginValidationSchema), auth_controller_1.AuthController.login);
 //TODO: only admin control routes
 router.patch('/users/:userId/block', (0, auth_1.default)('admin'), auth_controller_1.AuthController.blockUser);
-router.post('/blogs/:id', (0, auth_1.default)('admin'), auth_controller_1.AuthController.blockUser);
+router.delete('/blogs/:id', (0, auth_1.default)('admin'), auth_controller_1.AuthController.deleteBlog);
 exports.AuthRouter = router;

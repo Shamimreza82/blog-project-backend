@@ -3,6 +3,7 @@ import catchAsync from '../../../utils/catchAsync';
 import { AuthServices } from './auth.service';
 
 const register = catchAsync(async (req, res) => {
+
   const result = await AuthServices.register(req.body);
 
   res.status(StatusCodes.CREATED).json({
@@ -42,9 +43,8 @@ const blockUser = catchAsync(async (req, res) => {
 });
 
 const deleteBlog = catchAsync(async (req, res) => {
-  const {userId} = req.params
-  console.log(userId);
-   await AuthServices.deleteBlogIntoDB(userId);
+  const {id} = req.params
+   await AuthServices.deleteBlogIntoDB(id);
 
   res.status(StatusCodes.OK).json({
     success: true,

@@ -25,7 +25,11 @@ const register = (payload) => __awaiter(void 0, void 0, void 0, function* () {
         throw new Error('User is already Exist try anther email!');
     }
     const result = yield user_model_1.User.create(payload);
-    return result;
+    return {
+        _id: result._id,
+        name: result.name,
+        email: result.email
+    };
 });
 const login = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = payload;
@@ -49,6 +53,7 @@ const userBlockIntoDB = (userId) => __awaiter(void 0, void 0, void 0, function* 
     return result;
 });
 const deleteBlogIntoDB = (_id) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(_id);
     const result = yield blog_model_1.Blog.findByIdAndDelete({ _id });
     return result;
 });

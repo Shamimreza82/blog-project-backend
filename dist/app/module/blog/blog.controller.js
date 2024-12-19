@@ -17,7 +17,7 @@ const http_status_codes_1 = require("http-status-codes");
 const catchAsync_1 = __importDefault(require("../../../utils/catchAsync"));
 const blog_service_1 = require("./blog.service");
 const createBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield blog_service_1.BlogServices.createBlogIntoDB(req.body);
+    const result = yield blog_service_1.BlogServices.createBlogIntoDB(req.body, req.user);
     res.status(http_status_codes_1.StatusCodes.CREATED).json({
         success: true,
         message: 'Blog Create Successfully',

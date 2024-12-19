@@ -28,9 +28,9 @@ router.patch(
   AuthController.blockUser,
 );
 
-router.post(
+router.delete(
   '/blogs/:id', auth('admin'),
-  AuthController.blockUser,
+  AuthController.deleteBlog,
 );
 
 export const AuthRouter = router;

@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const express_1 = __importDefault(require("express"));
 const auth_route_1 = require("./app/module/auth/auth.route");
-const globalErrorHandler_1 = __importDefault(require("./middelware/globalErrorHandler"));
-const routerErrorHandler_1 = __importDefault(require("./middelware/routerErrorHandler"));
 const blog_route_1 = require("./app/module/blog/blog.route");
+const routerErrorHandler_1 = __importDefault(require("./middelware/routerErrorHandler"));
+const globalErrorHandler_1 = __importDefault(require("./middelware/globalErrorHandler"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use('/api/auth', auth_route_1.AuthRouter);

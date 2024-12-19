@@ -12,7 +12,11 @@ const register = async (payload: TUser) => {
     throw new Error('User is already Exist try anther email!');
   }
   const result = await User.create(payload);
-  return result;
+  return {
+    _id: result._id,
+    name: result.name, 
+    email: result.email
+  };
 };
 
 const login = async (payload: { email: string; password: string }) => {
@@ -56,6 +60,7 @@ const userBlockIntoDB = async (userId: string) => {
 };
 
 const deleteBlogIntoDB = async (_id: string) => {
+  console.log(_id);
   const result = await Blog.findByIdAndDelete({_id});
   return result;
 };

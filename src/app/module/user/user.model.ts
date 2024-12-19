@@ -43,10 +43,11 @@ userSchema.pre('save', async function () {
   this.password = password
 })
 
-// userSchema.post('save', async function (doc, next) {
-//   doc.password = ""
-//   next()
-// })
+userSchema.post('save', async function (docs, next) {
+
+
+  next()
+})
 
 
 export const User = model<TUser>("User", userSchema)

@@ -14,11 +14,11 @@ const createBlogValidationSchema = zod_1.z.object({
             required_error: 'Content is required',
         })
             .min(1, 'Content cannot be empty'),
-        author: zod_1.z
-            .string({
-            required_error: 'Author is required',
-        })
-            .regex(/^[a-fA-F0-9]{24}$/, 'Author must be a valid ObjectId'),
+        // author: z
+        //   .string({
+        //     required_error: 'Author is required',
+        //   })
+        //   .regex(/^[a-fA-F0-9]{24}$/, 'Author must be a valid ObjectId').optional(),
     }),
 });
 const updateBlogValidationSchema = zod_1.z.object({
@@ -33,11 +33,11 @@ const updateBlogValidationSchema = zod_1.z.object({
             required_error: 'Content is required',
         })
             .min(1, 'Content cannot be empty').optional(),
-        author: zod_1.z
-            .string({
-            required_error: 'Author is required',
-        })
-            .regex(/^[a-fA-F0-9]{24}$/, 'Author must be a valid ObjectId').optional(),
+        // author: z
+        //   .string({
+        //     required_error: 'Author is required',
+        //   })
+        //   .regex(/^[a-fA-F0-9]{24}$/, 'Author must be a valid ObjectId').optional(),
     }),
 });
 exports.BlogValidation = {

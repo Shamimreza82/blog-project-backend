@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import express from 'express'
 import { AuthRouter } from './app/module/auth/auth.route'
-import globalErrorHandler from './middelware/globalErrorHandler'
-import routerErrorHandler from './middelware/routerErrorHandler'
+
 import { BlogRouter } from './app/module/blog/blog.route'
+import routerErrorHandler from './middelware/routerErrorHandler'
+import globalErrorHandler from './middelware/globalErrorHandler'
 
 
 const app = express()

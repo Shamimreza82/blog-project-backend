@@ -3,7 +3,8 @@ import catchAsync from '../../../utils/catchAsync';
 import { BlogServices } from './blog.service';
 
 const createBlog = catchAsync(async (req, res) => {
-  const result = await BlogServices.createBlogIntoDB(req.body);
+ 
+  const result = await BlogServices.createBlogIntoDB(req.body, req.user);
 
   res.status(StatusCodes.CREATED).json({
     success: true,

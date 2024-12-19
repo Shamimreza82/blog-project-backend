@@ -14,11 +14,11 @@ const createBlogValidationSchema = z.object({
       })
       .min(1, 'Content cannot be empty'),
 
-    author: z
-      .string({
-        required_error: 'Author is required',
-      })
-      .regex(/^[a-fA-F0-9]{24}$/, 'Author must be a valid ObjectId'),
+    // author: z
+    //   .string({
+    //     required_error: 'Author is required',
+    //   })
+    //   .regex(/^[a-fA-F0-9]{24}$/, 'Author must be a valid ObjectId').optional(),
   }),
 });
 
@@ -37,11 +37,11 @@ const updateBlogValidationSchema = z.object({
       })
       .min(1, 'Content cannot be empty').optional(),
 
-    author: z
-      .string({
-        required_error: 'Author is required',
-      })
-      .regex(/^[a-fA-F0-9]{24}$/, 'Author must be a valid ObjectId').optional(),
+    // author: z
+    //   .string({
+    //     required_error: 'Author is required',
+    //   })
+    //   .regex(/^[a-fA-F0-9]{24}$/, 'Author must be a valid ObjectId').optional(),
 
   }),
 });

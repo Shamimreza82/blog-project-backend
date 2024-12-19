@@ -46,9 +46,8 @@ const blockUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void
     });
 }));
 const deleteBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { userId } = req.params;
-    console.log(userId);
-    yield auth_service_1.AuthServices.deleteBlogIntoDB(userId);
+    const { id } = req.params;
+    yield auth_service_1.AuthServices.deleteBlogIntoDB(id);
     res.status(http_status_codes_1.StatusCodes.OK).json({
         success: true,
         message: 'Blog deleted successfully',
