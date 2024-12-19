@@ -38,7 +38,6 @@ The Blog Management System is a full-stack web application that enables users to
 
 
 ### Technologies Used
-- **Frontend**: Next.js
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB with Mongoose
 - **Authentication**: JSON Web Tokens (JWT)
