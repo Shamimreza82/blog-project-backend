@@ -1,21 +1,16 @@
-
 import { JwtPayload } from 'jsonwebtoken';
 import { TBlog } from './blog.interface';
 import { Blog } from './blog.model';
 import { User } from '../user/user.model';
 import { Types } from 'mongoose';
-
+import QueryBuilder from '../../../Builder/QueryBuilder';
 
 const createBlogIntoDB = async (payload: TBlog, user: JwtPayload) => {
-
-
-  const userFind = await User.findOne({email: user?.email})
+  const userFind = await User.findOne({ email: user?.email });
   if (!userFind) {
-    throw new Error("User not found");
+    throw new Error('User not found');
   }
-console.log(userFind);
-  payload.author = userFind?._id as Types.ObjectId
-
+  payload.author = userFind?._id as Types.ObjectId;
 
   const result = await Blog.create(payload);
   return {
@@ -23,15 +18,20 @@ console.log(userFind);
     title: result.title,
     content: result.content,
     author: {
-      _id: userFind?._id, 
+      _id: userFind?._id,
       name: userFind?.name,
-      email: userFind?.email
+      email: userFind?.email,
     },
   };
 };
 
-const getAllBlogIntoDB = async () => {
-  const result = await Blog.find({},{_id: 1, title: 1, content: 1, author: 1 }).populate('author')
+const searchAbleFinds = ['title', 'content'];
+
+const getAllBlogIntoDB = async (query: Record<string, unknown>) => {
+  const blogs = new QueryBuilder(Blog.find(), query).sort()
+
+  // const result = await Blog.find({},{_id: 1, title: 1, content: 1, author: 1 }).populate('author')
+  const result = await blogs.modelQuery;
   return result;
 };
 

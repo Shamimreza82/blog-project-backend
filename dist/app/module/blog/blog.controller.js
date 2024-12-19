@@ -26,7 +26,7 @@ const createBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     });
 }));
 const getAllBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield blog_service_1.BlogServices.getAllBlogIntoDB();
+    const result = yield blog_service_1.BlogServices.getAllBlogIntoDB(req.query);
     res.status(http_status_codes_1.StatusCodes.OK).json({
         success: true,
         message: 'Blogs fetched successfully',

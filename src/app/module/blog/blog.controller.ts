@@ -15,7 +15,8 @@ const createBlog = catchAsync(async (req, res) => {
 });
 
 const getAllBlog = catchAsync(async (req, res) => {
-  const result = await BlogServices.getAllBlogIntoDB();
+
+  const result = await BlogServices.getAllBlogIntoDB(req.query);
 
   res.status(StatusCodes.OK).json({
     success: true,
@@ -40,7 +41,6 @@ const updateBlog = catchAsync(async (req, res) => {
 
 const deleteBlog = catchAsync(async (req, res) => {
   const { id } = req.params;
-
   await BlogServices.deletedBlogIntoDB(id);
 
   res.status(StatusCodes.OK).json({

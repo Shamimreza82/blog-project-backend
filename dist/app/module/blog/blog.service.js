@@ -8,16 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BlogServices = void 0;
 const blog_model_1 = require("./blog.model");
 const user_model_1 = require("../user/user.model");
+const QueryBuilder_1 = __importDefault(require("../../../Builder/QueryBuilder"));
 const createBlogIntoDB = (payload, user) => __awaiter(void 0, void 0, void 0, function* () {
     const userFind = yield user_model_1.User.findOne({ email: user === null || user === void 0 ? void 0 : user.email });
     if (!userFind) {
-        throw new Error("User not found");
+        throw new Error('User not found');
     }
-    console.log(userFind);
     payload.author = userFind === null || userFind === void 0 ? void 0 : userFind._id;
     const result = yield blog_model_1.Blog.create(payload);
     return {
@@ -27,12 +30,15 @@ const createBlogIntoDB = (payload, user) => __awaiter(void 0, void 0, void 0, fu
         author: {
             _id: userFind === null || userFind === void 0 ? void 0 : userFind._id,
             name: userFind === null || userFind === void 0 ? void 0 : userFind.name,
-            email: userFind === null || userFind === void 0 ? void 0 : userFind.email
+            email: userFind === null || userFind === void 0 ? void 0 : userFind.email,
         },
     };
 });
-const getAllBlogIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield blog_model_1.Blog.find({}, { _id: 1, title: 1, content: 1, author: 1 }).populate('author');
+const searchAbleFinds = ['title', 'content'];
+const getAllBlogIntoDB = (query) => __awaiter(void 0, void 0, void 0, function* () {
+    const blogs = new QueryBuilder_1.default(blog_model_1.Blog.find(), query).sort();
+    // const result = await Blog.find({},{_id: 1, title: 1, content: 1, author: 1 }).populate('author')
+    const result = yield blogs.modelQuery;
     return result;
 });
 const updateBlogIntoDB = (authorId, payload) => __awaiter(void 0, void 0, void 0, function* () {

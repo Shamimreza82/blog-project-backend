@@ -7,7 +7,7 @@ const auth = (...requiredRole: string[]) => {
     return catchAsync (async (req, res, next) => {
         const token = req.headers.authorization
         if(!token){
-            throw new Error("you are unauthorize")
+            throw new Error("you are unauthorize user")
         }
         const decode = await jwt.verify(token, envFile.jwt_access_secret as string) as JwtPayload
         const {email, role} = decode; 
@@ -17,7 +17,7 @@ const auth = (...requiredRole: string[]) => {
         }
 
         if(!requiredRole.includes(role)){
-            throw new Error("you are unauthorize")
+            throw new Error("you are unauthorize user")
         }
         req.user = decode 
         next()

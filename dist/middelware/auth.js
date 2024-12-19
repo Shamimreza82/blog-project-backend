@@ -20,7 +20,7 @@ const auth = (...requiredRole) => {
     return (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         const token = req.headers.authorization;
         if (!token) {
-            throw new Error("you are unauthorize");
+            throw new Error("you are unauthorize user");
         }
         const decode = yield jsonwebtoken_1.default.verify(token, config_1.envFile.jwt_access_secret);
         const { email, role } = decode;
@@ -29,7 +29,7 @@ const auth = (...requiredRole) => {
             throw new Error("you are unauthorize user");
         }
         if (!requiredRole.includes(role)) {
-            throw new Error("you are unauthorize");
+            throw new Error("you are unauthorize user");
         }
         req.user = decode;
         next();
