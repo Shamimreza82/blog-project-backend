@@ -11,7 +11,9 @@ app.use(express.json())
 
 
 app.use('/api/auth', AuthRouter)
+app.use('/api/admin', AuthRouter)
 app.use('/api/blogs', BlogRouter)
+
 
 
 

@@ -1,8 +1,26 @@
+import jwt, { JwtPayload } from "jsonwebtoken";
 import catchAsync from "../utils/catchAsync"
+import { envFile } from "../config";
+import { User } from "../app/module/user/user.model";
 
-const auth = (role: string) => {
-    return catchAsync (async (req, res) => {
-        
+const auth = (...requiredRole: string[]) => {
+    return catchAsync (async (req, res, next) => {
+        const token = req.headers.authorization
+        if(!token){
+            throw new Error("you are unauthorize")
+        }
+        const decode = await jwt.verify(token, envFile.jwt_access_secret as string) as JwtPayload
+        const {email, role} = decode; 
+        const user = await User.findOne({email})
+        if(!user){
+            throw new Error("you are unauthorize user")
+        }
+
+        if(!requiredRole.includes(role)){
+            throw new Error("you are unauthorize")
+        }
+        req.user = decode 
+        next()
     })
 }
 

@@ -17,6 +17,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_model_1 = require("../user/user.model");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const config_1 = require("../../../config");
+const blog_model_1 = require("../blog/blog.model");
 const register = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const { email } = payload;
     const isUserExist = yield user_model_1.User.findOne({ email });
@@ -42,7 +43,18 @@ const login = (payload) => __awaiter(void 0, void 0, void 0, function* () {
         token,
     };
 });
+//TODO admin control Services 
+const userBlockIntoDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_model_1.User.findOneAndUpdate({ _id: userId }, { isBlocked: true });
+    return result;
+});
+const deleteBlogIntoDB = (_id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield blog_model_1.Blog.findByIdAndDelete({ _id });
+    return result;
+});
 exports.AuthServices = {
     register,
     login,
+    userBlockIntoDB,
+    deleteBlogIntoDB
 };

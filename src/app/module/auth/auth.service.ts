@@ -3,6 +3,7 @@ import { TUser } from '../user/user.interface';
 import { User } from '../user/user.model';
 import bcrypt from 'bcrypt';
 import { envFile } from '../../../config';
+import { Blog } from '../blog/blog.model';
 
 const register = async (payload: TUser) => {
   const { email } = payload;
@@ -42,7 +43,26 @@ const login = async (payload: { email: string; password: string }) => {
   };
 };
 
+
+
+//TODO admin control Services 
+
+const userBlockIntoDB = async (userId: string) => {
+  const result = await User.findOneAndUpdate(
+    { _id: userId },
+    { isBlocked: true },
+  );
+  return result;
+};
+
+const deleteBlogIntoDB = async (_id: string) => {
+  const result = await Blog.findByIdAndDelete({_id});
+  return result;
+};
+
 export const AuthServices = {
   register,
   login,
+  userBlockIntoDB,
+  deleteBlogIntoDB
 };

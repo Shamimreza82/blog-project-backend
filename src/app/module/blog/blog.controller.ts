@@ -13,23 +13,45 @@ const createBlog = catchAsync(async (req, res) => {
   });
 });
 
-const updateBlog = catchAsync (async (req, res) => {
-const {id} = req.params
+const getAllBlog = catchAsync(async (req, res) => {
+  const result = await BlogServices.getAllBlogIntoDB();
 
-const result = await BlogServices.updateBlogIntoDB(id, req.body)
+  res.status(StatusCodes.OK).json({
+    success: true,
+    message: 'Blogs fetched successfully',
+    statusCode: StatusCodes.OK,
+    data: result || {},
+  });
+});
 
+const updateBlog = catchAsync(async (req, res) => {
+  const { id } = req.params;
 
-    res.status(StatusCodes.OK).json({
-        success: true,
-        message: 'Blog Update Successfully',
-        statusCode: StatusCodes.OK,
-        data: result || {},
-      });
-})
+  const result = await BlogServices.updateBlogIntoDB(id, req.body);
 
+  res.status(StatusCodes.OK).json({
+    success: true,
+    message: 'Blog Update Successfully',
+    statusCode: StatusCodes.OK,
+    data: result || {},
+  });
+});
 
+const deleteBlog = catchAsync(async (req, res) => {
+  const { id } = req.params;
+
+  await BlogServices.deletedBlogIntoDB(id);
+
+  res.status(StatusCodes.OK).json({
+    success: true,
+    message: 'Blog Deleted Successfully',
+    statusCode: StatusCodes.OK,
+  });
+});
 
 export const BlogController = {
   createBlog,
-  updateBlog
+  updateBlog,
+  getAllBlog,
+  deleteBlog,
 };

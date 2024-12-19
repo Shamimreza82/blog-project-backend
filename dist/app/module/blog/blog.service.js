@@ -15,11 +15,21 @@ const createBlogIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function
     const result = yield blog_model_1.Blog.create(payload);
     return result;
 });
+const getAllBlogIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield blog_model_1.Blog.find({}, { _id: 1, title: 1, content: 1, author: 1 }).populate('author');
+    return result;
+});
 const updateBlogIntoDB = (authorId, payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield blog_model_1.Blog.findOneAndUpdate({ author: authorId }, { $set: payload }, { new: true });
+    const result = yield blog_model_1.Blog.findOneAndUpdate({ author: authorId }, { $set: payload }, { new: true }).populate('author');
+    return result;
+});
+const deletedBlogIntoDB = (_id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield blog_model_1.Blog.findByIdAndDelete({ _id });
     return result;
 });
 exports.BlogServices = {
     createBlogIntoDB,
-    updateBlogIntoDB
+    updateBlogIntoDB,
+    deletedBlogIntoDB,
+    getAllBlogIntoDB,
 };
