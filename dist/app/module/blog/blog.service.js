@@ -36,7 +36,10 @@ const createBlogIntoDB = (payload, user) => __awaiter(void 0, void 0, void 0, fu
 });
 const searchAbleFinds = ['title', 'content'];
 const getAllBlogIntoDB = (query) => __awaiter(void 0, void 0, void 0, function* () {
-    const blogs = new QueryBuilder_1.default(blog_model_1.Blog.find(), query).sort();
+    const blogs = new QueryBuilder_1.default(blog_model_1.Blog.find({}, { _id: 1, title: 1, content: 1, author: 1 }).populate('author', '_id name email'), query)
+        .search(searchAbleFinds);
+    // .sort()
+    // .filter();
     // const result = await Blog.find({},{_id: 1, title: 1, content: 1, author: 1 }).populate('author')
     const result = yield blogs.modelQuery;
     return result;

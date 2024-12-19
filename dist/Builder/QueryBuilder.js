@@ -30,17 +30,9 @@ class QueryBuilder {
         this.modelQuery = this.modelQuery.find({ _id: queryObj.filter });
         return this;
     }
-    // paginate() {
-    //   const page = Number(this?.query?.page) || 1;
-    //   const limit = Number(this?.query?.limit) || 10;
-    //   const skip = (page - 1) * limit;
-    //   this.modelQuery = this.modelQuery.skip(skip).limit(limit);
-    //   return this;
-    // }
     sort() {
         var _a, _b, _c, _d;
         let sortStr = '';
-        console.log(this.query);
         if (((_a = this === null || this === void 0 ? void 0 : this.query) === null || _a === void 0 ? void 0 : _a.sortBy) && ((_b = this === null || this === void 0 ? void 0 : this.query) === null || _b === void 0 ? void 0 : _b.sortOrder)) {
             const sortBy = (_c = this === null || this === void 0 ? void 0 : this.query) === null || _c === void 0 ? void 0 : _c.sortBy;
             const sortOrder = (_d = this === null || this === void 0 ? void 0 : this.query) === null || _d === void 0 ? void 0 : _d.sortOrder;
@@ -49,15 +41,6 @@ class QueryBuilder {
         if (sortStr) {
             this.modelQuery = this.modelQuery.sort(sortStr);
         }
-        return this;
-    }
-    select() {
-        var _a, _b;
-        let fields = '-__v';
-        if ((_a = this === null || this === void 0 ? void 0 : this.query) === null || _a === void 0 ? void 0 : _a.fields) {
-            fields = (_b = this === null || this === void 0 ? void 0 : this.query.fields) === null || _b === void 0 ? void 0 : _b.split(',').join(' ');
-        }
-        this.modelQuery = this.modelQuery.select(fields);
         return this;
     }
 }

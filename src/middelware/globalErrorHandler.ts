@@ -8,6 +8,7 @@ import { handlerZodError } from "../helper/handleZodError"
 import { NextFunction, Request, Response } from "express"
 
 
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 export const globalErrorHandler = (err: any, req: Request, res: Response, _next: NextFunction): void => {
   if (err.name && err.name === "ZodError") {
       handlerZodError(err, res)

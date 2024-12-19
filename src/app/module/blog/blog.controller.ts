@@ -10,7 +10,7 @@ const createBlog = catchAsync(async (req, res) => {
     success: true,
     message: 'Blog Create Successfully',
     statusCode: StatusCodes.CREATED,
-    data: result || {},
+    data: result ,
   });
 });
 
@@ -22,7 +22,7 @@ const getAllBlog = catchAsync(async (req, res) => {
     success: true,
     message: 'Blogs fetched successfully',
     statusCode: StatusCodes.OK,
-    data: result || {},
+    data: result ,
   });
 });
 
@@ -35,7 +35,7 @@ const updateBlog = catchAsync(async (req, res) => {
     success: true,
     message: 'Blog Update Successfully',
     statusCode: StatusCodes.OK,
-    data: result || {},
+    data: result ,
   });
 });
 

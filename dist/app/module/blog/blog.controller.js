@@ -22,7 +22,7 @@ const createBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
         success: true,
         message: 'Blog Create Successfully',
         statusCode: http_status_codes_1.StatusCodes.CREATED,
-        data: result || {},
+        data: result,
     });
 }));
 const getAllBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -31,7 +31,7 @@ const getAllBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
         success: true,
         message: 'Blogs fetched successfully',
         statusCode: http_status_codes_1.StatusCodes.OK,
-        data: result || {},
+        data: result,
     });
 }));
 const updateBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -41,7 +41,7 @@ const updateBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
         success: true,
         message: 'Blog Update Successfully',
         statusCode: http_status_codes_1.StatusCodes.OK,
-        data: result || {},
+        data: result,
     });
 }));
 const deleteBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
