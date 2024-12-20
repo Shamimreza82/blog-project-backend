@@ -1,4 +1,5 @@
 "use strict";
+// import { FilterQuery, Query } from 'mongoose';
 Object.defineProperty(exports, "__esModule", { value: true });
 class QueryBuilder {
     constructor(modelQuery, query) {
@@ -8,37 +9,41 @@ class QueryBuilder {
     search(searchableFields) {
         var _a;
         const search = (_a = this === null || this === void 0 ? void 0 : this.query) === null || _a === void 0 ? void 0 : _a.search;
-        this.modelQuery = this.modelQuery.find({
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            $or: searchableFields.map((field) => ({
-                [field]: { $regex: search, $options: 'i' },
-            })),
-        });
+        if (search) {
+            this.modelQuery = this.modelQuery.find({
+                $or: searchableFields.map((field) => ({
+                    [field]: { $regex: search, $options: 'i' },
+                })),
+            });
+        }
         return this;
     }
     filter() {
         const queryObj = Object.assign({}, this.query);
-        const excludingImportant = [
-            'search',
-            'page',
-            'limit',
-            'sortOrder',
-            'sortBy',
-            'fields',
-        ];
+        const excludingImportant = ['search', 'sortOrder', 'sortBy', 'fields'];
         excludingImportant.forEach((key) => delete queryObj[key]);
-        this.modelQuery = this.modelQuery.find({ _id: queryObj.filter });
+        const filterConditions = {};
+        Object.entries(queryObj).forEach(([key, value]) => {
+            if (value !== undefined && value !== null) {
+                if (key === 'author') {
+                    filterConditions[key] = value;
+                }
+                else {
+                    filterConditions[key] = value;
+                }
+            }
+        });
+        if (Object.keys(filterConditions).length > 0) {
+            this.modelQuery = this.modelQuery.find(filterConditions);
+        }
         return this;
     }
     sort() {
-        var _a, _b, _c, _d;
-        let sortStr = '';
-        if (((_a = this === null || this === void 0 ? void 0 : this.query) === null || _a === void 0 ? void 0 : _a.sortBy) && ((_b = this === null || this === void 0 ? void 0 : this.query) === null || _b === void 0 ? void 0 : _b.sortOrder)) {
-            const sortBy = (_c = this === null || this === void 0 ? void 0 : this.query) === null || _c === void 0 ? void 0 : _c.sortBy;
-            const sortOrder = (_d = this === null || this === void 0 ? void 0 : this.query) === null || _d === void 0 ? void 0 : _d.sortOrder;
-            sortStr = `${sortOrder === 'desc' ? '-' : ''}${sortBy}`;
-        }
-        if (sortStr) {
+        var _a, _b;
+        const sortBy = (_a = this === null || this === void 0 ? void 0 : this.query) === null || _a === void 0 ? void 0 : _a.sortBy;
+        const sortOrder = (_b = this === null || this === void 0 ? void 0 : this.query) === null || _b === void 0 ? void 0 : _b.sortOrder;
+        if (sortBy && (sortOrder === 'asc' || sortOrder === 'desc')) {
+            const sortStr = `${sortOrder === 'desc' ? '-' : ''}${sortBy}`;
             this.modelQuery = this.modelQuery.sort(sortStr);
         }
         return this;
