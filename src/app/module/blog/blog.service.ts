@@ -40,7 +40,7 @@ const getAllBlogIntoDB = async (query: Record<string, unknown>) => {
   .filter();
 
   // const result = await Blog.find({},{_id: 1, title: 1, content: 1, author: 1 }).populate('author')
-  const result = await blogs.modelQuery;
+  const result = await blogs.modelQuery.exec();;
   return result;
 };
 

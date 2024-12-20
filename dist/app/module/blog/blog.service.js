@@ -41,7 +41,8 @@ const getAllBlogIntoDB = (query) => __awaiter(void 0, void 0, void 0, function* 
         .sort()
         .filter();
     // const result = await Blog.find({},{_id: 1, title: 1, content: 1, author: 1 }).populate('author')
-    const result = yield blogs.modelQuery;
+    const result = yield blogs.modelQuery.exec();
+    ;
     return result;
 });
 const updateBlogIntoDB = (authorId, payload) => __awaiter(void 0, void 0, void 0, function* () {
