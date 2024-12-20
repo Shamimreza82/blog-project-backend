@@ -71,7 +71,7 @@ The Blog Management System is a full-stack web application that enables users to
 6. Access the application at `http://localhost:5000`.
 
 ### Live Demo
-[Live URL](#) (Replace with actual live URL)
+[Live URL](https://blog-management-system-navy.vercel.app/) 
 
 
 
