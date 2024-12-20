@@ -4,6 +4,7 @@ import { AuthRouter } from './app/module/auth/auth.route'
 import { BlogRouter } from './app/module/blog/blog.route'
 import routerErrorHandler from './middelware/routerErrorHandler'
 import globalErrorHandler from './middelware/globalErrorHandler'
+import { userRouter } from './app/module/user/user.route'
 
 
 
@@ -14,6 +15,7 @@ app.use(express.json())
 app.use('/api/auth', AuthRouter)
 app.use('/api/admin', AuthRouter)
 app.use('/api/blogs', BlogRouter)
+app.use('/api/users', userRouter)
 
 
 

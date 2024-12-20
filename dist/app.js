@@ -18,11 +18,13 @@ const auth_route_1 = require("./app/module/auth/auth.route");
 const blog_route_1 = require("./app/module/blog/blog.route");
 const routerErrorHandler_1 = __importDefault(require("./middelware/routerErrorHandler"));
 const globalErrorHandler_1 = __importDefault(require("./middelware/globalErrorHandler"));
+const user_route_1 = require("./app/module/user/user.route");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use('/api/auth', auth_route_1.AuthRouter);
 app.use('/api/admin', auth_route_1.AuthRouter);
 app.use('/api/blogs', blog_route_1.BlogRouter);
+app.use('/api/users', user_route_1.userRouter);
 app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send({ message: "server is running" });
 }));
