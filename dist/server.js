@@ -18,7 +18,7 @@ const config_1 = require("./config");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         mongoose_1.default.connect(config_1.envFile.data_base_url);
-        app_1.default.listen(config_1.envFile.port, () => {
+        const server = app_1.default.listen(config_1.envFile.port, () => {
             console.log(`Server is listening on port ${config_1.envFile.port}`);
         });
     }
@@ -27,3 +27,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 main();
+// process.on('unhandledRejection', (err) => {
+//    if(server){
+//    }
+// })

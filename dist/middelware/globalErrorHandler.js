@@ -11,6 +11,7 @@ const handleDuplicateError_1 = require("../helper/handleDuplicateError");
 const handleGenericError_1 = require("../helper/handleGenericError");
 const handlerValidationError_1 = require("../helper/handlerValidationError");
 const handleZodError_1 = require("../helper/handleZodError");
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 const globalErrorHandler = (err, req, res, _next) => {
     if (err.name && err.name === "ZodError") {
         (0, handleZodError_1.handlerZodError)(err, res);
