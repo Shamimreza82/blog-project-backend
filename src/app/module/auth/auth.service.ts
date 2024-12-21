@@ -32,6 +32,7 @@ const login = async (payload: { email: string; password: string }) => {
   }
 
   const JwtPayload = {
+    userId: isUserExist?._id,
     ...payload,
     role: isUserExist?.role,
   };

@@ -19,6 +19,7 @@ const auth = (...requiredRole: string[]) => {
         if(!requiredRole.includes(role)){
             throw new Error("you are unauthorize user")
         }
+
         req.user = decode 
         next()
     })

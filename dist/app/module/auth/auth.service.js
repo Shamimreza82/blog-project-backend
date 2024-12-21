@@ -41,7 +41,7 @@ const login = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     if (!matchPassword) {
         throw new Error('Please provide Valid password');
     }
-    const JwtPayload = Object.assign(Object.assign({}, payload), { role: isUserExist === null || isUserExist === void 0 ? void 0 : isUserExist.role });
+    const JwtPayload = Object.assign(Object.assign({ userId: isUserExist === null || isUserExist === void 0 ? void 0 : isUserExist._id }, payload), { role: isUserExist === null || isUserExist === void 0 ? void 0 : isUserExist.role });
     const token = yield jsonwebtoken_1.default.sign(JwtPayload, config_1.envFile.jwt_access_secret, { expiresIn: '30d' });
     return {
         token,

@@ -40,14 +40,18 @@ const getAllBlogIntoDB = (query) => __awaiter(void 0, void 0, void 0, function* 
         .search(searchAbleFinds)
         .sort()
         .filter();
-    // const result = await Blog.find({},{_id: 1, title: 1, content: 1, author: 1 }).populate('author')
     const result = yield blogs.modelQuery.exec();
     ;
     return result;
 });
-const updateBlogIntoDB = (authorId, payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield blog_model_1.Blog.findOneAndUpdate({ author: authorId }, { $set: payload }, { new: true }).populate('author');
-    return result;
+const updateBlogIntoDB = (_id, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield blog_model_1.Blog.findOneAndUpdate({ _id }, { $set: payload }, { new: true }).populate('author', "_id name email");
+    return {
+        _id: result === null || result === void 0 ? void 0 : result._id,
+        title: result === null || result === void 0 ? void 0 : result.title,
+        content: result === null || result === void 0 ? void 0 : result.content,
+        author: result === null || result === void 0 ? void 0 : result.author
+    };
 });
 const deletedBlogIntoDB = (_id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield blog_model_1.Blog.findByIdAndDelete({ _id });

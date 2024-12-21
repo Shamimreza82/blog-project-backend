@@ -1,5 +1,4 @@
 "use strict";
-// import { FilterQuery, Query } from 'mongoose';
 Object.defineProperty(exports, "__esModule", { value: true });
 class QueryBuilder {
     constructor(modelQuery, query) {
