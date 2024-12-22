@@ -5,7 +5,8 @@ import { User } from "../app/module/user/user.model";
 
 const auth = (...requiredRole: string[]) => {
     return catchAsync (async (req, res, next) => {
-        const token = req.headers.authorization
+        const token = req.headers.authorization?.split(' ')[1]
+     console.log(token);
         if(!token){
             throw new Error("you are unauthorize user")
         }
